@@ -1,7 +1,7 @@
-import useUserStore from './modules/userStore'
+import useUserStore from './modules/userStore';
 
-export default function userStore() {
+export function userStore() {
   return {
     user: useUserStore()
-  }
+  };
 }

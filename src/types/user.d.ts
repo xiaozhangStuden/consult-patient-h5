@@ -1,12 +1,12 @@
 export type User = {
   /** token令牌 */
-  token: string
+  token: string;
   /** 用户ID */
-  id: string
+  id: string;
   /** 用户名称 */
-  account: string
+  account: string;
   /** 手机号 */
-  mobile: string
+  mobile?: string;
   /** 头像 */
-  avatar: string
-}
+  avatar?: string;
+};

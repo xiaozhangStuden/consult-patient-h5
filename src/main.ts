@@ -1,14 +1,14 @@
-import { createPinia } from 'pinia'
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import './utils/viewport.js'
+import { createPinia } from 'pinia';
+import persist from 'pinia-plugin-persistedstate';
+import 'vant/lib/index.css';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import './utils/viewport.js';
 
-import './assets/main.css'
+const app = createApp(App);
 
-const app = createApp(App)
+app.use(createPinia().use(persist));
+app.use(router);
 
-app.use(createPinia())
-app.use(router)
-
-app.mount('#app')
+app.mount('#app');

@@ -1,5 +1,5 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
@@ -17,7 +17,7 @@ module.exports = {
       'warn',
       {
         singleQuote: true,
-        semi: false,
+        semi: true,
         printWidth: 80,
         trailingComma: 'none',
         endOfLine: 'auto'
@@ -31,4 +31,4 @@ module.exports = {
     ],
     'vue/no-setup-props-destructure': ['off']
   }
-}
+};

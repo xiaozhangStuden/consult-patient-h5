@@ -1,11 +1,9 @@
 <template>
   <div>
-    <LoginIndexVue></LoginIndexVue>
+    <RouterView></RouterView>
   </div>
 </template>
 
-<script lang="ts" setup>
-import LoginIndexVue from './views/Login/Login-index.vue';
-</script>
+<script lang="ts" setup></script>
 
 <style scoped></style>

@@ -1,16 +1,9 @@
 <template>
   <div class="login-index">
-    <NavBar
-      :leftBtn="'true||back'"
-      title="登录"
-      :rightBtn="'true||注册||#16C2A3'"
-    ></NavBar>
+    <NavBar :leftBtn="'true||back'" title="登录" :rightBtn="'true||注册||#16C2A3'"></NavBar>
     <div class="login-type">
       <div class="type-text">{{ loginType }}</div>
-      <div
-        class="checked-login-type"
-        @click="checkoutLoginStatus(checkoutLoginType.type)"
-      >
+      <div class="checked-login-type" @click="checkoutLoginStatus(checkoutLoginType.type)">
         {{ checkoutLoginType.value }}
         <span class="rightIcon"></span>
       </div>

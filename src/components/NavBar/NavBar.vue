@@ -1,11 +1,7 @@
 <template>
   <div class="cp-NavBar-root">
     <div class="nav-left" @click="handleLeftClick">
-      <div
-        class="left-icon"
-        v-if="_leftBtn[0] === 'true'"
-        :class="_leftBtn[1]"
-      ></div>
+      <div class="left-icon" v-if="_leftBtn[0] === 'true'" :class="_leftBtn[1]"></div>
     </div>
     <div class="nav-title" v-if="props.title">{{ props.title }}</div>
     <div class="nav-right" @click="handleRightClick">

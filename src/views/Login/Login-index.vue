@@ -50,7 +50,7 @@ const handleLogin = (value : loginParams) => {
     isClickLogin.value = true
   }
   else {
-    isClickLogin.value = falses
+    isClickLogin.value = false
   }
 }
 </script>

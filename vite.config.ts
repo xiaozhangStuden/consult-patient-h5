@@ -11,5 +11,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        //你的less文件 地址
+        additionalData: `@import "@/styles/index.less";`
+      }
+    }
   }
 });

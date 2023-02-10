@@ -16,3 +16,15 @@ export function gotoLogin(config: gotoLoginConfig) {
     isLogin() && config.callback();
   }
 }
+
+
+export function debounce(fn: Function, awaitTime: number) {
+  let timer: null | number = null
+  return function (this: any, ...args: any) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      timer = null
+      fn.apply(this, args)
+    }, awaitTime)
+  }
+}

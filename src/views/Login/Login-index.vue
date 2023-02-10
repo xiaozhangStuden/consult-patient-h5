@@ -9,7 +9,13 @@
       </div>
     </div>
     <div class="form">
-      <div class=""></div>
+      <div class="mobile-from">
+        <input type="text" class="mobile-input" placeholder="请输入手机号码" v-model="loginParams.mobile">
+      </div>
+      <div class="password-from">
+        <input type="password" name="password" placeholder="请输入密码" v-model="loginParams.password"  >
+      </div>
+      <div class="agreement"></div>
     </div>
   </div>
 </template>
@@ -22,6 +28,9 @@ const checkoutLoginType = ref({
   type: 'shortMessage',
   value: '手机验证码登录'
 });
+const loginParams = ref({mobile : '', password :''})
+
+
 
 const checkoutLoginStatus = (type: string) => {
   console.log(type);
@@ -39,31 +48,55 @@ const checkoutLoginStatus = (type: string) => {
   .login-type {
     display: flex;
     justify-content: space-between;
-    padding: 0 0.15rem;
+    padding: 0 0.3rem;
     box-sizing: border-box;
-    margin-top: 0.25rem;
-    margin-bottom: 0.45rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.9rem;
   }
   .type-text {
-    width: 1.94rem;
-    height: 0.36rem;
-    font-size: 0.24rem;
+    width: 1.92rem;
+    height: 0.72rem;
+    font-size: 0.48rem;
     font-weight: 500;
     color: #121826;
-    line-height: 0.36rem;
+    line-height: 0.72rem;
   }
   .checked-login-type {
-    font-size: 0.15rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.3rem;
     font-weight: 400;
     color: #3c3e42;
-    line-height: 0.36rem;
+    line-height: 0.72rem;
     .rightIcon {
       display: inline-block;
-      width: 0.15rem;
-      height: 0.1rem;
+      width: 0.4rem;
+      height: 0.4rem;
       background: url('@/assets/chevron-right.png') no-repeat center center;
-      background-size: 0.18rem;
+      background-size: 0.4rem;
     }
   }
+  .form{
+    padding: 0 0.3rem;
+    box-sizing: border-box;
+    .mobile-from , .password-from{
+      width: 6.9rem;
+      height: 1.03rem;
+      &>input {
+        width: 100%;
+        height: 100%;
+        vertical-align: top;
+        outline: none;
+        box-sizing: border-box;
+        border: none;
+        font-size: 0.28rem;
+        border-bottom: 0.02rem solid rgba(237,237,237,0.9) !important;
+    }
+    >input::placeholder{
+      color: #C3C3C5;
+      font-size: 0.28rem;
+    }
+      }
+    }
 }
 </style>

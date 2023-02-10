@@ -52,16 +52,16 @@ const handleRightClick = () => {
 <style scoped lang="less">
 .cp-NavBar-root {
   display: flex;
-  height: 0.44rem;
-  width: 3.75rem;
-  font-size: 0.15rem;
+  height: 0.88rem;
+  width: 7.5rem;
+  font-size: 0.3rem;
   align-items: center;
   background: #ffffff;
   .nav-left,
   .nav-right {
-    width: 0.6rem;
+    width: 1.2rem;
     height: 100%;
-    line-height: 0.44rem;
+    line-height: 0.88rem;
     text-align: center;
     .right-icon-text {
       font-weight: 400;
@@ -70,7 +70,7 @@ const handleRightClick = () => {
   .nav-title {
     flex: 1;
     height: 100%;
-    line-height: 0.44rem;
+    line-height: 0.88rem;
     text-align: center;
     font-weight: 500;
     color: #000000;
@@ -80,11 +80,11 @@ const handleRightClick = () => {
   }
   .back {
     background: url('@/assets/back.png') no-repeat center center;
-    background-size: 0.18rem;
+    background-size: 0.32rem;
   }
   .share {
     background: url('@/assets/share.png') no-repeat center center;
-    background-size: 0.18rem;
+    background-size: 0.32rem;
   }
 }
 </style>

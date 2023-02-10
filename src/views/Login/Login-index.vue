@@ -9,38 +9,50 @@
       </div>
     </div>
     <div class="form">
-      <div class="mobile-from">
-        <input type="text" class="mobile-input" placeholder="请输入手机号码" v-model="loginParams.mobile">
+      <passwordLogin @sendFormData="handleLogin"></passwordLogin>
+      <div class="agreement">
+        <label for="checkAgreement"  class="checkAgreement" @click="handleChangeRadio(agreementRadio)">
+          <div class="radio-option" :class="{'radio-option-active' : agreementRadio}" ></div>
+          我已同意<span>&nbsp用户协议&nbsp</span> 及<span>&nbsp隐私协议&nbsp</span>
+        </label>
       </div>
-      <div class="password-from">
-        <input type="password" name="password" placeholder="请输入密码" v-model="loginParams.password"  >
+      <div class="login-btn-container">
+        <div class="login-btn" :class="{'login-btn-active' : isClickLogin}">登录</div>
       </div>
-      <div class="agreement"></div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-
+import passwordLogin from './components/Password-Login.vue';
 const loginType = ref('密码登录');
 const checkoutLoginType = ref({
   type: 'shortMessage',
   value: '手机验证码登录'
 });
-const loginParams = ref({mobile : '', password :''})
+const isClickLogin = ref(false)
+const agreementRadio = ref(false)
 
-
+const handleChangeRadio = (value:boolean) => {
+  agreementRadio.value = !value
+}
 
 const checkoutLoginStatus = (type: string) => {
-  console.log(type);
-
   checkoutLoginType.value =
     type === 'shortMessage'
       ? { type: 'passwordLogin', value: '使用密码登录' }
       : { type: 'shortMessage', value: '手机验证码登录' };
   loginType.value = type === 'shortMessage' ? '短信登录' : '密码登录';
 };
+const handleLogin = (value : loginParams) => {
+  if(value.mobile && value.password) {
+    isClickLogin.value = true
+  }
+  else {
+    isClickLogin.value = falses
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -79,24 +91,49 @@ const checkoutLoginStatus = (type: string) => {
   .form{
     padding: 0 0.3rem;
     box-sizing: border-box;
-    .mobile-from , .password-from{
-      width: 6.9rem;
-      height: 1.03rem;
-      &>input {
-        width: 100%;
-        height: 100%;
-        vertical-align: top;
-        outline: none;
-        box-sizing: border-box;
-        border: none;
-        font-size: 0.28rem;
-        border-bottom: 0.02rem solid rgba(237,237,237,0.9) !important;
-    }
-    >input::placeholder{
-      color: #C3C3C5;
-      font-size: 0.28rem;
-    }
+    .agreement {
+      height: 0.4rem;
+      margin-top: 0.3rem;
+      font-size: 0.26rem;
+      span{
+        color: #16C2A3;
+        font-weight: 400
+      }
+      .checkAgreement{
+        display: flex;
+      }
+      .radio-option{
+        width: 0.29rem;
+        height: 0.29rem;
+        margin-right: 0.14rem;
+        background: #ffffff;
+        border: 0.02rem solid #c3c3c5;
+        border-radius: 50%;
+      }
+      .radio-option-active {
+        transition: .5s all;
+        border: 0.02rem solid #16C2A3;
+        background: url(@/assets/success.png) no-repeat center center;
+        background-size: 0.25rem;
+        background-color: @themeColor;
       }
     }
+   .login-btn-container{
+    margin-top: 0.42rem;
+      .login-btn{
+        width: 6.9rem;
+        height: 0.88rem;
+        background: #fafafa;
+        border-radius: 0.44rem;
+        font-size: 0.32rem;
+        text-align: center;
+        line-height: 0.88rem;
+        color: #fff;
+      }
+      .login-btn-active {
+        background: @themeColor;
+      }
+   } 
+  }
 }
 </style>

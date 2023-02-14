@@ -14,10 +14,10 @@ import { debounce } from '@/common/utils/toolFunction';
 import { defineEmits, ref } from 'vue';
 
 interface VueComponentsEmits {
-  ( EventName : 'sendFormData' , value :loginParams   ) : void
+  ( EventName : 'sendFormData' , value :PasswordLoginParams   ) : void
 }
 const emits = defineEmits<VueComponentsEmits>()
-const loginParams = ref<loginParams>({ mobile: '', password: '' })
+const loginParams = ref<PasswordLoginParams>({ mobile: '', password: '' })
 const handleChangeMobile = debounce(function () {
   emits('sendFormData' , loginParams.value)
 } , 200)
@@ -28,24 +28,26 @@ const handleChangePassword = debounce( function () {
 </script>
 
 <style scoped lang="less">
-.mobile-from,
-.password-from {
-  width: 6.9rem;
-  height: 1.03rem;
-  &>input {
-    width: 100%;
-    height: 100%;
-    vertical-align: top;
-    outline: none;
-    box-sizing: border-box;
-    border: none;
-    font-size: 0.28rem;
-    border-bottom: 0.02rem solid rgba(237, 237, 237, 0.9) !important;
-  }
+.login-password-type{
+  .mobile-from,.password-from {
+    width: 6.9rem;
+    height: 1.03rem;
+    &>input {
+      width: 100%;
+      height: 100%;
+      vertical-align: top;
+      outline: none;
+      box-sizing: border-box;
+      border: none;
+      font-size: 0.28rem;
+      border-bottom: 0.02rem solid rgba(237, 237, 237, 0.9) !important;
+    }
 
-  >input::placeholder {
-    color: #C3C3C5;
-    font-size: 0.28rem;
+    >input::placeholder {
+      color: #C3C3C5;
+      font-size: 0.28rem;
+    }
   }
 }
+
 </style>

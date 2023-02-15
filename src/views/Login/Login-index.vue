@@ -17,9 +17,7 @@
           我已同意<span>&nbsp用户协议&nbsp</span> 及<span>&nbsp隐私协议&nbsp</span>
         </label>
       </div>
-      <div class="login-btn-container">
-        <div class="login-btn" :class="{'login-btn-active' : isClickLogin}">登录</div>
-      </div>
+      <Button size="large" class="el-button-login"  v-bind="bindBtnStyles" >登录</Button>
       <div class="forget-Password" v-if="loginType.type === LOGINTYPE.PASSWORDLOGIN" >忘记密码?</div>
       <div class="Three-party-Login">
         <div class="Three-party-Login-text">第三方登录</div>
@@ -30,8 +28,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import Button from '../components/Button.vue';
 import passwordLogin from './components/Password-Login.vue';
 import SmsLogin from './components/Sms-Login.vue';
 import { LOGINTYPE } from './components/TS';
@@ -41,8 +40,10 @@ const checkoutLoginType = ref({
   type: LOGINTYPE.SHORTMESSAGE,
   value: '手机验证码登录'
 });
-const isClickLogin = ref(false)
-const agreementRadio = ref(false)
+const disableLoginBtn = ref(false)
+const agreementRadio = ref(false) 
+const bindBtnStyles = computed( () => ({textColor: `${disableLoginBtn.value ? '#fff' : '#D9DBDE'}` , bgcColor : `${disableLoginBtn.value ? '#16C2A3' : '#fafafa'}`}))
+
 
 const rightBtnFunc = () => {
   router.push('/Register')
@@ -64,19 +65,19 @@ const checkoutLoginStatus = (type: string) => {
 // 处理验证码 登录逻辑 
 const handleValidateCodeLogin = (value : ValidateCodeLoginParams) => {
   if(value.mobile && value.code) {
-    isClickLogin.value = true
+    disableLoginBtn.value = true
   }
   else {
-    isClickLogin.value = false
+    disableLoginBtn.value = false
   }
 }
 // 处理 密码登录 逻辑
 const handlePasswordLogin = (value : PasswordLoginParams) => {
   if(value.mobile && value.password) {
-    isClickLogin.value = true
+    disableLoginBtn.value = true
   }
   else {
-    isClickLogin.value = false
+    disableLoginBtn.value = false
   }
 }
 </script>
@@ -143,6 +144,9 @@ const handlePasswordLogin = (value : PasswordLoginParams) => {
         background-size: 0.25rem;
         background-color: @themeColor;
       }
+    }
+    .el-button-login{
+      margin-top: 0.3rem;
     }
    .login-btn-container{
     margin-top: 0.42rem;

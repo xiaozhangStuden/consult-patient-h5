@@ -7,6 +7,9 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend';
 export default defineConfig({
   base: '',
   plugins: [vue(), vueJsx(), VueSetupExtend()],
+  server : {
+    
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

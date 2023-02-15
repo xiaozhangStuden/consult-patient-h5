@@ -5,19 +5,22 @@
     </div>
     <div class="code-from">
       <input type="text" name="code" @input="handleChangeValidateCode" placeholder="请输入验证码" v-model="validateCodeLogin.code">
-      <div class="getCode" @click="getVerificationCode">获取验证码</div>
+      <div class="getCode" @click="getVerificationCode">{{isClickGetCode ? `${timer} s后重新获取` : '获取验证码'}}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { debounce } from '@/common/utils/toolFunction';
+import { useTimer } from '@/hooks/useTimer';
 import { defineEmits, ref } from 'vue';
 interface LoginComponentsEmits {
   ( EventName : 'sendFormData' , value :ValidateCodeLoginParams   ) : void
 }
 const validateCodeLogin = ref<ValidateCodeLoginParams>({mobile : '' , code : ''})
 const emits = defineEmits<LoginComponentsEmits>()
+const { start , timer } = useTimer(60)
+const isClickGetCode = ref(false)
 
 const handleChangeMobile = debounce( function () {
   emits('sendFormData' , validateCodeLogin.value)
@@ -27,7 +30,9 @@ const handleChangeValidateCode = debounce(function () {
 } , 200)
 // 获取验证码
 const getVerificationCode = () => {
-  console.log("获取code");
+  if(isClickGetCode.value) return
+  isClickGetCode.value = true
+  start()
   
 }
 </script>

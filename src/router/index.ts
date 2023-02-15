@@ -1,3 +1,4 @@
+import Layout from '@/Layout/index.vue';
 import { isLogin } from '@/common/utils/toolFunction';
 import { createRouter, createWebHistory } from 'vue-router';
 const router = createRouter({
@@ -5,7 +6,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/Layout'
+    },
+    {
+      path :'/Layout',
+      component : Layout
     },
     {
       path: '/login',
@@ -15,10 +20,7 @@ const router = createRouter({
       path :'/Register',
       component : () => import('@/views/Register/Register-index.vue')
     },
-    {
-      path: '/home',
-      component: () => import('@/views/Home/index.vue')
-    }
+    
   ]
 });
 router.beforeEach((to, from, next) => {

@@ -8,6 +8,12 @@ interface ValidateCodeLoginParams {
   code : string
 }
 
+interface ValidateCodeRegister {
+  mobile: string,
+  code : string,
+  password : string
+}
+
 interface LoginComponentEmits<key , T> {
   sendFormData? : (key , T ) => void
 }

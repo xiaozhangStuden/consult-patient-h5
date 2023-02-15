@@ -5,7 +5,7 @@
     </div>
     <div class="code-from">
       <input type="text" name="code" @input="handleChangeValidateCode" placeholder="请输入验证码" v-model="validateCodeLogin.code">
-      <div class="getCode">获取验证码</div>
+      <div class="getCode" @click="getVerificationCode">获取验证码</div>
     </div>
   </div>
 </template>
@@ -25,6 +25,11 @@ const handleChangeMobile = debounce( function () {
 const handleChangeValidateCode = debounce(function () {
   emits('sendFormData' , validateCodeLogin.value)
 } , 200)
+// 获取验证码
+const getVerificationCode = () => {
+  console.log("获取code");
+  
+}
 </script>
 
 <style scoped lang="less">

@@ -3,7 +3,7 @@
     <div class="nav-left" @click="handleLeftClick">
       <div class="left-icon" v-if="_leftBtn[0] === 'true'" :class="_leftBtn[1]"></div>
     </div>
-    <div class="nav-title" v-if="props.title">{{ props.title }}</div>
+    <div class="nav-title" v-if="props.title || props.title === ''">{{ props.title }}</div>
     <div class="nav-right" @click="handleRightClick">
       <div
         class="right-icon-text"
@@ -22,12 +22,14 @@ import { computed, ref } from 'vue';
 
 interface NavBarProps {
   leftBtn?: 'true||back' | 'default';
-  letBtnFunc?: Function;
-  title?: string;
+  leftBtnFunc?: Function;
+  title?: string ;
   rightBtn?: string;
   rightBtnFunc?: Function;
 }
-const props = defineProps<NavBarProps>();
+const props = withDefaults(defineProps<NavBarProps>() ,{
+  title : ''
+})
 const _leftBtn = ref<string[]>([]);
 const _rightBtn = ref<string[]>([]);
 const _rightFunctionIconList = ref(['more', 'search', 'personal', 'share']);
@@ -42,7 +44,7 @@ _leftBtn.value = processBtn(props.leftBtn ? props.leftBtn : '||');
 _rightBtn.value = processBtn(props.rightBtn ? props.rightBtn : 'true||');
 
 const handleLeftClick = () => {
-  props.letBtnFunc && props.letBtnFunc();
+  props.leftBtnFunc && props.leftBtnFunc();
 };
 const handleRightClick = () => {
   props.rightBtnFunc && props.rightBtnFunc();

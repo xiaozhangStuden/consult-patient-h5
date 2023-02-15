@@ -1,15 +1,15 @@
 <template>
   <div class="login-index">
-    <NavBar :leftBtn="'true||back'" title="登录" :rightBtn="'true||注册||#16C2A3'"></NavBar>
+    <NavBar :leftBtn="'true||back'" title="登录" :rightBtn="'true||注册||#16C2A3'"  :right-btn-func="rightBtnFunc" ></NavBar>
     <div class="login-type">
-      <div class="type-text">{{ loginType }}</div>
+      <div class="type-text">{{ loginType.text }}</div>
       <div class="checked-login-type" @click="checkoutLoginStatus(checkoutLoginType.type)">
         {{ checkoutLoginType.value }}
         <span class="rightIcon"></span>
       </div>
     </div>
     <div class="form">
-      <passwordLogin v-if="checkoutLoginType.type !== LOGINTYPE.PASSWORDLOGIN"  @sendFormData="handlePasswordLogin"></passwordLogin>
+      <passwordLogin v-if="loginType.type === LOGINTYPE.PASSWORDLOGIN"  @sendFormData="handlePasswordLogin"></passwordLogin>
       <SmsLogin  @sendFormData="handleValidateCodeLogin" v-else ></SmsLogin>
       <div class="agreement">  
         <label for="checkAgreement"  class="checkAgreement" @click="handleChangeRadio(agreementRadio)">
@@ -20,6 +20,7 @@
       <div class="login-btn-container">
         <div class="login-btn" :class="{'login-btn-active' : isClickLogin}">登录</div>
       </div>
+      <div class="forget-Password" v-if="loginType.type === LOGINTYPE.PASSWORDLOGIN" >忘记密码?</div>
       <div class="Three-party-Login">
         <div class="Three-party-Login-text">第三方登录</div>
         <div class="QQ-Login-icon"></div>
@@ -30,10 +31,12 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import passwordLogin from './components/Password-Login.vue';
 import SmsLogin from './components/Sms-Login.vue';
 import { LOGINTYPE } from './components/TS';
-const loginType = ref('密码登录');
+const router = useRouter()
+const loginType = ref({type : LOGINTYPE.PASSWORDLOGIN , text:'密码登录'});
 const checkoutLoginType = ref({
   type: LOGINTYPE.SHORTMESSAGE,
   value: '手机验证码登录'
@@ -41,15 +44,21 @@ const checkoutLoginType = ref({
 const isClickLogin = ref(false)
 const agreementRadio = ref(false)
 
+const rightBtnFunc = () => {
+  router.push('/Register')
+}
+
+
 const handleChangeRadio = (value:boolean) => {
   agreementRadio.value = !value
 }
 
 const checkoutLoginStatus = (type: string) => {
+  // 更新 切换类型 文本 
   checkoutLoginType.value =
     type === LOGINTYPE.SHORTMESSAGE ? { type: LOGINTYPE.PASSWORDLOGIN, value: '使用密码登录' } : { type: LOGINTYPE.SHORTMESSAGE, value: '手机验证码登录' };
-    
-    loginType.value = type === LOGINTYPE.SHORTMESSAGE ? '短信登录' : '密码登录';
+    // 更新 登录类型 
+    loginType.value = type === LOGINTYPE.SHORTMESSAGE ? {type : LOGINTYPE.SHORTMESSAGE , text : '短信登录'} : {type : LOGINTYPE.PASSWORDLOGIN , text : '密码登录'};
 };
 
 // 处理验证码 登录逻辑 
@@ -154,6 +163,16 @@ const handlePasswordLogin = (value : PasswordLoginParams) => {
         background: @themeColor;
       }
    } 
+   .forget-Password{
+    width: 100%;
+    text-align: center;
+    height: 0.4rem;
+    font-size: 0.28rem;
+    font-weight: 400;
+    color: #848484;
+    line-height: 0.4rem;
+    margin-top: 0.3rem;
+    }
    .Three-party-Login{
     position: absolute;
     width: 4rem;

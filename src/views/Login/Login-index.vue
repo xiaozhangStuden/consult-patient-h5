@@ -17,7 +17,7 @@
           我已同意<span>&nbsp用户协议&nbsp</span> 及<span>&nbsp隐私协议&nbsp</span>
         </label>
       </div>
-      <cp-button size="large" class="el-button-login"  v-bind="bindBtnStyles" >登录</cp-button>
+      <cp-button size="large" class="el-button-login"  v-bind="bindBtnStyles" @click="handleLogin" >登录</cp-button>
       <div class="forget-Password" v-if="loginType.type === LOGINTYPE.PASSWORDLOGIN" >忘记密码?</div>
       <div class="Three-party-Login">
         <div class="Three-party-Login-text">第三方登录</div>
@@ -40,10 +40,27 @@ const checkoutLoginType = ref({
   type: LOGINTYPE.SHORTMESSAGE,
   value: '手机验证码登录'
 });
+const pwdLoginParams = ref<PasswordLoginParams>({mobile : '' , password : ''})
 const disableLoginBtn = ref(false)
 const agreementRadio = ref(false) 
 const bindBtnStyles = computed( () => ({textColor: `${disableLoginBtn.value ? '#fff' : '#D9DBDE'}` , bgcColor : `${disableLoginBtn.value ? '#16C2A3' : '#fafafa'}`}))
 
+/**
+* @description: 处理登录逻辑
+* @param {type} 
+* @return: 
+*/
+const handleLogin = async () => {
+  const { mobile , password } = pwdLoginParams.value
+  if(!mobile || !password) return 
+  
+  // let res = {}
+  try {
+    // res = await getUserLogin()
+  } catch (error) {
+    
+  }
+}
 
 const rightBtnFunc = () => {
   router.push('/Register')
@@ -73,6 +90,7 @@ const handleValidateCodeLogin = (value : ValidateCodeLoginParams) => {
 }
 // 处理 密码登录 逻辑
 const handlePasswordLogin = (value : PasswordLoginParams) => {
+  pwdLoginParams.value = value
   if(value.mobile && value.password) {
     disableLoginBtn.value = true
   }

@@ -1,7 +1,8 @@
 import axios, {
-  AxiosError,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig
+AxiosError,
+type AxiosRequestConfig,
+type AxiosResponse,
+type InternalAxiosRequestConfig
 } from 'axios';
 
 const servicesInstance = axios.create({
@@ -32,3 +33,9 @@ servicesInstance.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+function request<T>(config :AxiosRequestConfig) {
+  return servicesInstance.request<T>(config)
+}
+
+
+export default request

@@ -1,9 +1,15 @@
 <template>
   <div>
-    <RouterView></RouterView>
+    <keep-alive>
+      <RouterView></RouterView>
+    </keep-alive>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
 
-<style scoped></style>
+</script>
+
+<style scoped lang="less">
+</style>
+  

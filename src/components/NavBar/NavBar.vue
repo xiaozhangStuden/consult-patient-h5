@@ -61,7 +61,7 @@ const handleRightClick = () => {
   background: #ffffff;
   .nav-left,
   .nav-right {
-    width: 1.2rem;
+    width: 0.8rem;
     height: 100%;
     line-height: 0.88rem;
     text-align: center;

@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="cp-button">
 import { defineEmits } from 'vue';
 
 interface ButtonEmitsEvent {

@@ -10,7 +10,7 @@
           <div class="radio-option" :class="{'radio-option-active' : agreementRadio}" ></div>
           我已同意<span class="agreementLink">&nbsp优医协议&nbsp</span>
       </label>
-      <Button class="el-button" size="large" :bgc-color="BgcColor" :text-color="textColor" @click="handleRegisterClick">注册</Button>
+      <cp-button class="el-button" size="large" :bgc-color="BgcColor" :text-color="textColor" @click="handleRegisterClick">注册</cp-button>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 import { LOGIN_PAGE_PATH } from '@/contance/modules/loginContance';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Button from '../components/Button.vue';
+import cpButton from '../components/cp-button.vue';
 import registerForm from './components/register-form.vue';
 const router = useRouter()
 const BgcColor = ref('#fafafa')

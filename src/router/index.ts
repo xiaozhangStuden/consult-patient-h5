@@ -2,6 +2,7 @@ import Layout from '@/Layout/index.vue';
 import { isLogin } from '@/common/utils/toolFunction';
 import { contanceRouterPath } from '@/contance';
 import { createRouter, createWebHistory } from 'vue-router';
+const needLoginPagelist = [contanceRouterPath.PROFILE_PAGE_PATH]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -39,14 +40,26 @@ const router = createRouter({
       path :'/Register',
       component : () => import('@/views/Register/Register-index.vue')
     },
+    {
+      path :'/bindMobile',
+      component : () => import('@/views/Register/BindMobilePhone/BindMonile-index.vue')
+    },
     
   ]
 });
+
 router.beforeEach((to, from, next) => {
-  if (isLogin()) {
-    next();
-  } else {
-    router.push('/login');
+  if(needLoginPagelist.includes(to.path)) {
+    console.log( "路由" , isLogin());
+    if(isLogin()) {
+      next() 
+    }
+    else { 
+      router.push('/login');
+    }
+  }
+  else {
+    next()
   }
 });
 

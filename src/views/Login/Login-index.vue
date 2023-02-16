@@ -17,7 +17,7 @@
           我已同意<span>&nbsp用户协议&nbsp</span> 及<span>&nbsp隐私协议&nbsp</span>
         </label>
       </div>
-      <Button size="large" class="el-button-login"  v-bind="bindBtnStyles" >登录</Button>
+      <cp-button size="large" class="el-button-login"  v-bind="bindBtnStyles" >登录</cp-button>
       <div class="forget-Password" v-if="loginType.type === LOGINTYPE.PASSWORDLOGIN" >忘记密码?</div>
       <div class="Three-party-Login">
         <div class="Three-party-Login-text">第三方登录</div>
@@ -30,10 +30,10 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Button from '../components/Button.vue';
+import cpButton from '../components/cp-button.vue';
+import { LOGINTYPE } from './TS';
 import passwordLogin from './components/Password-Login.vue';
 import SmsLogin from './components/Sms-Login.vue';
-import { LOGINTYPE } from './components/TS';
 const router = useRouter()
 const loginType = ref({type : LOGINTYPE.PASSWORDLOGIN , text:'密码登录'});
 const checkoutLoginType = ref({

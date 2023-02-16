@@ -5,13 +5,15 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 export function isLogin() {
   const user = userStore().user;
+  console.log("用户信息" , user.userInfo);
+  
   return user.userInfo.token ? true : false;
 }
 
 export function gotoLogin(config: gotoLoginConfig) {
   if (!isLogin()) {
     route.path !== constLoginModule.LOGIN_PAGE_PATH &&
-      router.push(constLoginModule.LOGIN_PAGE_PATH);
+    router.push(constLoginModule.LOGIN_PAGE_PATH);
     if (!config.callback) return;
     isLogin() && config.callback();
   }

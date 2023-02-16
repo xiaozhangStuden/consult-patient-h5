@@ -3,7 +3,7 @@
     <RouterView></RouterView>
     <div class="App-Tabs-container">
       <div class="App-Tabs">
-        <div v-for="item in appTabs" :key="item.id" class="item" @click="handleTabItemClick(item.id)">
+        <div v-for="item in appTabs" :key="item.id" class="item" @click="handleTabItemClick(item)">
         <div class="item-text" :style="{color : item.id === currentId ? '#16c2a3' : ''}">{{item.value}}</div>
           <div class="icon-container"><img :src="item.id === currentId ?  item.activeIcon : item.icon " alt=""></div>
       </div>
@@ -21,38 +21,53 @@ import MyHomePageActivetIcon from '@/assets/homeIcon/mine-active.png'
 import MyHomePageDefaultIcon from '@/assets/homeIcon/mine-default.png'
 import MNActiveIcon from '@/assets/homeIcon/notice-active.png'
 import MNDefaultIcon from '@/assets/homeIcon/notice-default.png'
-
+import { contanceRouterPath } from '@/contance'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+interface TabItem {
+  id : number,
+  icon : string
+  activeIcon : string
+  value : string
+  path :string
+}
 const currentId = ref(1)
 const appTabs = ref([
   {
     id : 1,
     icon : homeDefalutIcon,
     activeIcon : homeActivetIcon,
-    value : '首页'
+    value : '首页',
+    path : contanceRouterPath.HOME_PAGE_PATH
   },
   {
     id : 2,
     icon : HealthDetaultIcon,
     activeIcon : HealthActiveIcon,
-    value : '健康百科'
+    value : '健康百科',
+    path : contanceRouterPath.HEALTHENCYCLOPEDIA_PAGE_PATH
   },
   {
     id : 3,
     icon : MNDefaultIcon,
     activeIcon : MNActiveIcon,
-    value : '消息通知'
+    value : '消息通知',
+    path : contanceRouterPath.MESSAGENOTICE_PAGE_PATH
   },
   {
     id : 4,
     icon :  MyHomePageDefaultIcon,
     activeIcon : MyHomePageActivetIcon,
-    value : '我的'
+    value : '我的',
+    path : contanceRouterPath.PROFILE_PAGE_PATH
   }
  ])
+ const router = useRouter()
 
- const handleTabItemClick = (id : number) => {
-  currentId.value = id
+ const handleTabItemClick = (item : TabItem) => {
+    currentId.value = item.id
+    router.push(item.path)
+    
  }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>首页</div>
+  <div>健康百科</div>
 </template>
 
 <script lang="ts" setup>
